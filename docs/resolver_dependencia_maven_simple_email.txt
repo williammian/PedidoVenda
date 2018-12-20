@@ -1,0 +1,1 @@
+https://pt.stackoverflow.com/questions/69011/problemas-com-depend%C3%AAncias-de-pacotes-maven
