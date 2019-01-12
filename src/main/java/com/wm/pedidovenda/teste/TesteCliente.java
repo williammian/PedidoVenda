@@ -1,4 +1,4 @@
-package com.wm.pedidovenda.util;
+package com.wm.pedidovenda.teste;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,8 +9,7 @@ import com.wm.pedidovenda.model.Cliente;
 import com.wm.pedidovenda.model.Endereco;
 import com.wm.pedidovenda.model.TipoPessoa;
 
-
-public class Teste {
+public class TesteCliente {
 
 	public static void main(String[] args) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PedidoPU");
@@ -20,7 +19,7 @@ public class Teste {
 		trx.begin();
 		
 		Cliente cliente = new Cliente();
-		cliente.setNome("João das Couves2");
+		cliente.setNome("João das Couves");
 		cliente.setEmail("joao@dascouves.com");
 		cliente.setDocumentoReceitaFederal("123.123.123-12");
 		cliente.setTipo(TipoPessoa.FISICA);
