@@ -56,6 +56,23 @@ public class Produtos implements Serializable {
 		}
 	}
 	
+//	Utilizando Session do hibernate
+//	@SuppressWarnings("unchecked")
+//	public List<Produto> filtrados(ProdutoFilter filtro) {
+//		Session session = manager.unwrap(Session.class);
+//		Criteria criteria = session.createCriteria(Produto.class);
+//		
+//		if (StringUtils.isNotBlank(filtro.getSku())) {
+//			criteria.add(Restrictions.eq("sku", filtro.getSku()));
+//		}
+//		
+//		if (StringUtils.isNotBlank(filtro.getNome())) {
+//			criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
+//		}
+//		
+//		return criteria.addOrder(Order.asc("nome")).list();
+//	}
+	
 	public List<Produto> filtrados(ProdutoFilter filtro) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Produto> criteriaQuery = builder.createQuery(Produto.class);
