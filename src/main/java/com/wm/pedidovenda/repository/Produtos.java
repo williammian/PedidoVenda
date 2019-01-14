@@ -56,7 +56,7 @@ public class Produtos implements Serializable {
 		}
 	}
 	
-//	Utilizando Session do hibernate
+//	Utilizando Session/Criteria do hibernate
 //	@SuppressWarnings("unchecked")
 //	public List<Produto> filtrados(ProdutoFilter filtro) {
 //		Session session = manager.unwrap(Session.class);
@@ -73,6 +73,7 @@ public class Produtos implements Serializable {
 //		return criteria.addOrder(Order.asc("nome")).list();
 //	}
 	
+	//Criteria do Hibernate Depreciado: Usando Criteria API do JPA (Hibernate 5)
 	public List<Produto> filtrados(ProdutoFilter filtro) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Produto> criteriaQuery = builder.createQuery(Produto.class);
