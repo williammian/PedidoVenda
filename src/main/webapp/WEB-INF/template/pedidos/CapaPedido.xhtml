@@ -24,6 +24,13 @@
             	itemValue="#{vendedor}" itemLabel="#{vendedor.nome}" />
         </p:selectOneMenu>
         
+        <!-- autocomplete para cliente
+        <p:outputLabel value="Cliente" for="cliente"/>
+        <p:autoComplete id="cliente" size="40" dropdown="true" 
+        	value="#{cadastroPedidoBean.pedido.cliente}" completeMethod="#{cadastroPedidoBean.completarCliente}"
+        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" />
+        -->
+        
         <p:outputLabel value="Cliente" for="cliente"/>
         <h:panelGroup>
 	        <p:inputText id="cliente" size="40" value="#{cadastroPedidoBean.nomeCliente}" 
