@@ -2,7 +2,6 @@ package com.wm.pedidovenda.controller;
 
 import java.io.File;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
@@ -33,14 +32,9 @@ public class EnvioPedidoEmailBean implements Serializable {
 	public void enviarPedido() throws Exception {
 		MailMessage message = mailer.novaMensagem();
 		
-		//new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template"))
-		
-		URL resource = getClass().getResource("/emails/pedido.template");
-		File file = new File(resource.toURI());
-		
 		message.to(this.pedido.getCliente().getEmail())
 			.subject("Pedido " + this.pedido.getId())
-			.bodyHtml(new VelocityTemplate(file))
+			.bodyHtml(new VelocityTemplate(new File("/emails/pedido.template")))
 			.put("pedido", this.pedido)
 			.put("numberTool", new NumberTool())
 			.put("locale", new Locale("pt", "BR"))
