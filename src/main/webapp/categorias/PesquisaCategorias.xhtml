@@ -1,0 +1,80 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <f:metadata>
+		<f:viewParam name="dummy"/>
+		<f:event listener="#{pesquisaCategoriasBean.preRender}" type="preRenderView"/>
+	</f:metadata>
+
+    <ui:define name="titulo">Pesquisa de categorias</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frmPesquisa">
+	    	<h1>Pesquisa de categorias</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaCategoriasBean.pesquisar}"
+	    				update="@form" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo"  />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    			
+	    		<p:outputLabel value="Categoria Raiz" for="categoria"/>
+	    		<p:selectOneMenu id="categoria" value="#{pesquisaCategoriasBean.filtro.categoriaRaiz}">
+	    			<f:selectItem itemLabel="Selecione a categoria"/>
+	    			<f:selectItems value="#{pesquisaCategoriasBean.categoriasRaizes}" var="categoria"
+	    				itemValue="#{categoria}" itemLabel="#{categoria.descricao}" />
+	    		</p:selectOneMenu>
+	    			
+	    		<p:outputLabel value="Descrição" for="descricao"/>
+	    		<p:inputText id="descricao" size="60" value="#{pesquisaCategoriasBean.filtro.descricao}" />
+	    		
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="categoriasTable" value="#{pesquisaCategoriasBean.categoriasFiltradas}" var="categoria"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma categoria encontrada." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		<p:column headerText="Categoria Raiz">
+	    			<h:outputText value="#{categoria.categoriaPai.descricao}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Descrição">
+	    			<h:outputText value="#{categoria.descricao}" />
+	    		</p:column>
+	    		
+	    		<p:column style="width: 100px; text-align: center">
+	    			<p:button  icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="categoria" value="#{categoria.id}" />
+	    			</p:button>
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisaCategoriasBean.categoriaSelecionada}" 
+	    					value="#{categoria}" />
+	    			</p:commandButton>
+	    		</p:column>
+	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de categoria" 
+	    		message="Tem certeza que deseja excluir a categoria #{pesquisaCategoriasBean.categoriaSelecionada.descricao}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisaCategoriasBean.excluir}" process="@this"
+	    			update=":frmPesquisa:categoriasTable" id="yesButton" />
+	    	</p:confirmDialog>
+    	</h:form>
+    </ui:define>
+</ui:composition>
