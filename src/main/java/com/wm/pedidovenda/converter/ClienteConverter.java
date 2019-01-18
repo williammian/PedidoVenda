@@ -31,7 +31,8 @@ public class ClienteConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			return ((Cliente) value).getId().toString();
+			Cliente cliente = (Cliente) value;
+			return cliente.getId() == null ? null : cliente.getId().toString();
 		}
 		return "";
 	}

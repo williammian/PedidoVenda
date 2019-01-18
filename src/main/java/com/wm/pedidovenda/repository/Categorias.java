@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,6 +30,10 @@ public class Categorias implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
+	public Categoria guardar(Categoria categoria) {
+		return manager.merge(categoria);
+	}
+	
 	@Transactional
 	public void remover(Categoria categoria) throws NegocioException {
 		try {
@@ -42,6 +47,16 @@ public class Categorias implements Serializable {
 	
 	public Categoria porId(Long id) {
 		return manager.find(Categoria.class, id);
+	}
+	
+	public Categoria porDescricao(String descricao) {
+		try {
+			return manager.createQuery("from Categoria where upper(descricao) = :descricao", Categoria.class)
+				.setParameter("descricao", descricao.toUpperCase())
+				.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	public List<Categoria> raizes() {
@@ -73,8 +88,11 @@ public class Categorias implements Serializable {
 		
 		criteriaQuery.select(categoriaRoot);
 		criteriaQuery.where(predicates.toArray(new Predicate[0]));
-		Order order = builder.asc(categoriaJoin.get("descricao"));
-		criteriaQuery.orderBy(order);
+		
+		List<Order> orderList = new ArrayList<Order>(); 
+		orderList.add(builder.asc(categoriaJoin.get("descricao")));
+		orderList.add(builder.asc(categoriaRoot.get("descricao")));
+		criteriaQuery.orderBy(orderList);
 		
 		TypedQuery<Categoria> query = manager.createQuery(criteriaQuery);
 		return query.getResultList();

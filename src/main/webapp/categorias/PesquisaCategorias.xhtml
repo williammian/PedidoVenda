@@ -24,7 +24,7 @@
 	    				update="@form" />
 	    		</p:toolbarGroup>
 	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo"  />
+	    			<p:button value="Novo" outcome="/categorias/CadastroCategoria" />
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 	    	
@@ -56,7 +56,7 @@
 	    		</p:column>
 	    		
 	    		<p:column style="width: 100px; text-align: center">
-	    			<p:button  icon="ui-icon-pencil" title="Editar">
+	    			<p:button outcome="/categorias/CadastroCategoria" icon="ui-icon-pencil" title="Editar">
 	    				<f:param name="categoria" value="#{categoria.id}" />
 	    			</p:button>
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"

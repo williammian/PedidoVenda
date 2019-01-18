@@ -1,0 +1,52 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
+
+    <ui:define name="titulo">#{cadastroCategoriaBean.editando ? 'Edição de categoria' : 'Nova categoria'}</ui:define>
+    
+    <ui:define name="corpo">
+    	<f:metadata>
+    		<o:viewParam name="categoria" value="#{cadastroCategoriaBean.categoria}" />
+    		<f:viewAction action="#{cadastroCategoriaBean.inicializar}" />
+    	</f:metadata>
+
+    	<h:form id="frm">
+			<p:focus context="frm" />
+			
+	    	<h1>#{cadastroCategoriaBean.editando ? 'Edição de categoria' : 'Nova categoria'}</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:button value="Novo" outcome="/categorias/CadastroCategoria" />
+	    			<p:commandButton value="Salvar" id="botaoSalvar"
+	    				action="#{cadastroCategoriaBean.salvar}" update="@form"
+	    				validateClient="false" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Pesquisa" outcome="/categorias/PesquisaCategorias" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    			    		
+	    		<p:outputLabel value="Descrição" for="descricao"/>
+	    		<p:inputText id="descricao" size="60" maxlength="60" value="#{cadastroCategoriaBean.categoria.descricao}" />
+	    		
+	    		<p:outputLabel value="Categoria Raiz" for="categoriaRaiz"/>
+	    		<p:selectOneMenu id="categoriaRaiz" value="#{cadastroCategoriaBean.categoria.categoriaPai}">
+	    			<f:selectItem itemLabel="Selecione a categoria"/>
+	    			<f:selectItems value="#{cadastroCategoriaBean.categoriasRaizes}" var="categoriaRaiz"
+	    				itemValue="#{categoriaRaiz}" itemLabel="#{categoriaRaiz.descricao}" />
+	    		</p:selectOneMenu>
+	    		
+	    	</p:panelGrid>
+    	</h:form>
+    </ui:define>
+</ui:composition>

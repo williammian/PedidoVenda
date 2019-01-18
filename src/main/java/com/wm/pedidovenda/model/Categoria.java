@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
@@ -35,6 +37,7 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 60)
 	public String getDescricao() {
 		return descricao;
