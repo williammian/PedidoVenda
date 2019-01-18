@@ -193,7 +193,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.0.3</version>
+			<version>6.7.0</version>
 			<scope>compile</scope>
 		</dependency>
 
