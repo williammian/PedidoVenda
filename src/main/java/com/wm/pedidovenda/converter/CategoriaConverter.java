@@ -41,7 +41,7 @@ public class CategoriaConverter implements Converter, ClientConverter {
 		
 		return "";
 	}
-
+	
 	@Override
 	public Map<String, Object> getMetadata() {
 		return null;
