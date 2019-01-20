@@ -1,13 +1,13 @@
 package com.wm.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.sun.faces.taglib.html_basic.SelectManyCheckboxTag;
 import com.wm.pedidovenda.model.Grupo;
 import com.wm.pedidovenda.model.Usuario;
 import com.wm.pedidovenda.repository.Usuarios;
@@ -38,6 +38,7 @@ public class CadastroUsuarioBean implements Serializable {
 	}
 	
 	public void inicializar() {
+		gruposSelecionados = new ArrayList<>();
 		if (this.usuario == null) {
 			limpar();
 		}
