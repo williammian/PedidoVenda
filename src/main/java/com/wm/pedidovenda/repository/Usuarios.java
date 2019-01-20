@@ -32,6 +32,10 @@ public class Usuarios implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
+	public Usuario guardar(Usuario usuario) {
+		return manager.merge(usuario);
+	}
+	
 	@Transactional
 	public void remover(Usuario usuario) throws NegocioException {
 		try {
@@ -76,7 +80,7 @@ public class Usuarios implements Serializable {
 		CriteriaQuery<Usuario> criteriaQuery = builder.createQuery(Usuario.class);
 		List<Predicate> predicates = new ArrayList<>();
 		
-		Root<Usuario> usuarioRoot = criteriaQuery.from(Usuario.class);
+		Root<Usuario> usuarioRoot = criteriaQuery.from(Usuario.class);	
 								
 		if (StringUtils.isNotBlank(filtro.getNome())) {
 			predicates.add(builder.like(builder.lower(usuarioRoot.get("nome")), 

@@ -1,5 +1,7 @@
 package com.wm.pedidovenda.converter;
 
+import java.util.Map;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -7,6 +9,7 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.convert.ClientConverter;
 
 import com.wm.pedidovenda.model.Grupo;
 import com.wm.pedidovenda.repository.Grupos;

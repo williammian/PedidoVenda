@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
@@ -43,6 +45,7 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 	
+	@Email
 	@Column(nullable = false, unique = true, length = 255)
 	public String getEmail() {
 		return email;
