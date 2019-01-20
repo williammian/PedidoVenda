@@ -46,10 +46,11 @@
 	    		<p:inputText id="senha" size="20" maxlength="20" value="#{cadastroUsuarioBean.usuario.senha}" />
 	    		
 	    		<p:outputLabel value="Grupos" for="grupos"/>
-	    		<p:selectManyCheckbox id="grupos" value="#{cadastroUsuarioBean.gruposSelecionados}"
-	    			required="true">
+	    		<p:selectManyCheckbox id="grupos" value="#{cadastroUsuarioBean.usuario.grupos}" required="true">
+	    			<f:attribute name="collectionType" value="java.util.ArrayList"/>
 	    			<f:selectItems value="#{cadastroUsuarioBean.grupos}" var="grupo"
 	    				itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
+	    			<f:converter converterId="grupoConverter" />
 	    		</p:selectManyCheckbox>
 	    		
 	    	</p:panelGrid>

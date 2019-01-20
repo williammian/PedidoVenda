@@ -1,7 +1,6 @@
 package com.wm.pedidovenda.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -30,24 +29,18 @@ public class CadastroUsuarioBean implements Serializable {
 	private Usuario usuario;
 		
 	private List<Grupo> grupos;
-	
-	private List<Grupo> gruposSelecionados;
 		
 	public CadastroUsuarioBean() {
 		limpar();
 	}
 	
 	public void inicializar() {
-		gruposSelecionados = new ArrayList<>();
 		if (this.usuario == null) {
 			limpar();
 		}
 		
 		grupos = usuarios.grupos();
 		
-		if(this.usuario != null) {
-			gruposSelecionados = usuario.getGrupos();
-		}
 	}
 	
 	private void limpar() {
@@ -56,8 +49,7 @@ public class CadastroUsuarioBean implements Serializable {
 	
 	public void salvar() {
 		try {
-			this.usuario.setGrupos(gruposSelecionados);
-			
+						
 			this.usuario = cadastroUsuarioService.salvar(this.usuario);
 			limpar();
 			
@@ -83,14 +75,6 @@ public class CadastroUsuarioBean implements Serializable {
 		return grupos;
 	}
 	
-	public List<Grupo> getGruposSelecionados() {
-		return gruposSelecionados;
-	}
-
-	public void setGruposSelecionados(List<Grupo> gruposSelecionados) {
-		this.gruposSelecionados = gruposSelecionados;
-	}
-
 	public boolean isEditando() {
 		return this.usuario.getId() != null;
 	}
