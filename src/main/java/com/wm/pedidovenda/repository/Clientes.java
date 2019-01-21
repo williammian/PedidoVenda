@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,6 +17,7 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.wm.pedidovenda.model.Categoria;
 import com.wm.pedidovenda.model.Cliente;
 import com.wm.pedidovenda.repository.filter.ClienteFilter;
 import com.wm.pedidovenda.service.NegocioException;
@@ -52,6 +54,16 @@ public class Clientes implements Serializable {
 				"where upper(nome) like :nome", Cliente.class)
 				.setParameter("nome", nome.toUpperCase() + "%")
 				.getResultList();
+	}
+	
+	public Cliente buscarPorNome(String nome) {
+		try {
+			return manager.createQuery("from Cliente where upper(nome) = :nome", Cliente.class)
+				.setParameter("nome", nome.toUpperCase())
+				.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	public List<Cliente> filtrados(ClienteFilter filtro) {

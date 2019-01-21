@@ -55,7 +55,7 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "doc_receita_federal", nullable = false, length = 14)
+	@Column(name = "doc_receita_federal", nullable = false, length = 18)
 	public String getDocumentoReceitaFederal() {
 		return documentoReceitaFederal;
 	}
