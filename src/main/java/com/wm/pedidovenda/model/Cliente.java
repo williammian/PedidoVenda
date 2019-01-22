@@ -25,6 +25,7 @@ public class Cliente implements Serializable {
 	private String email;
 	private String documentoReceitaFederal;
 	private TipoPessoa tipo;
+	private String telefone;
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@Id
@@ -72,6 +73,15 @@ public class Cliente implements Serializable {
 
 	public void setTipo(TipoPessoa tipo) {
 		this.tipo = tipo;
+	}
+	
+	@Column(length = 20)
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

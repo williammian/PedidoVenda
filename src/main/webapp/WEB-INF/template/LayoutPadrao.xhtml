@@ -12,10 +12,11 @@
         <h:outputStylesheet library="css" name="sistema.css" />
         <h:outputScript library="js" name="jquery.maskMoney.js"/>
         <h:outputScript library="js" name="validadores.js"/>
+        <h:outputScript library="js" name="jquery.inputmask.bundle.js"/>
 	</h:head>
 
 	<h:body>
-		<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
+		<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMascaras()">
 			<f:facet name="start">
 				<h:graphicImage library="images" name="loading.gif"/>
 			</f:facet>
@@ -71,12 +72,18 @@
 		</footer>
 		
 		<script>
-			function configurarMoeda() {
+			function configurarMascaras() {
 				$(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true });
+				
+				$(".telefone").inputmask({
+			        mask: ["(99) 9999-9999", "(99) 99999-9999"],
+			        keepStatic: true
+			    });
+						
 			}
 			
 			$(document).ready(function() {
-				configurarMoeda();
+				configurarMascaras();
 			});
 		</script>
 	</h:body>

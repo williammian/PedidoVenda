@@ -49,6 +49,9 @@
 					size="#{cadastroClienteBean.sizeCpfCnpj}" maxlength="#{cadastroClienteBean.sizeCpfCnpj}"
 					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" required="true"/>
 	    		
+	    		<p:outputLabel value="Telefone" for="telefone"/>
+	    		<p:inputText id="telefone" size="20" maxlength="20" styleClass="telefone" value="#{cadastroClienteBean.cliente.telefone}" />
+	    		
 	    		<p:outputLabel value="E-mail" for="email"/>
 	    		<p:inputText id="email" size="200" maxlength="255" value="#{cadastroClienteBean.cliente.email}" />
 	    		
