@@ -56,6 +56,68 @@
 	    		<p:inputText id="email" size="200" maxlength="255" value="#{cadastroClienteBean.cliente.email}" />
 	    		
 	    	</p:panelGrid>
+	    	
+	    	<h2>Endereços</h2>
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:button value="Novo Endereço"  />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:dataTable id="enderecosTable" value="#{cadastroClienteBean.cliente.enderecos}" var="endereco"
+	    		style="margin-top: 20px" emptyMessage="Nenhum endereço encontrado." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		<p:column headerText="Id">
+	    			<h:outputText value="#{endereco.id}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Logradouro">
+	    			<h:outputText value="#{endereco.logradouro}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Número">
+	    			<h:outputText value="#{endereco.numero}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Complemento">
+	    			<h:outputText value="#{endereco.complemento}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Cidade">
+	    			<h:outputText value="#{endereco.cidade}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="UF">
+	    			<h:outputText value="#{endereco.uf}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="CEP">
+	    			<h:outputText value="#{endereco.cep}" />
+	    		</p:column>
+	    		
+	    		<p:column style="width: 100px; text-align: center">
+	    			<p:button  icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="endereco" value="#{endereco.id}" />
+	    			</p:button>
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frm:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{cadastroClienteBean.enderecoSelecionado}" 
+	    					value="#{endereco}" />
+	    			</p:commandButton>
+	    		</p:column>
+	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de endereço" 
+	    		message="Tem certeza que deseja excluir o endereço #{cadastroClienteBean.enderecoSelecionado.id}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{cadastroClienteBean.excluirEndereco}" process="@this"
+	    			update=":frm:enderecosTable" id="yesButton" />
+	    	</p:confirmDialog>
+	    	
     	</h:form>
     </ui:define>
 </ui:composition>

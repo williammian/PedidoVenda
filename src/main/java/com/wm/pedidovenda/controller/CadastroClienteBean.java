@@ -2,12 +2,12 @@ package com.wm.pedidovenda.controller;
 
 import java.io.Serializable;
 
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.wm.pedidovenda.model.Cliente;
+import com.wm.pedidovenda.model.Endereco;
 import com.wm.pedidovenda.model.TipoPessoa;
 import com.wm.pedidovenda.service.CadastroClienteService;
 import com.wm.pedidovenda.service.NegocioException;
@@ -26,6 +26,8 @@ public class CadastroClienteBean implements Serializable {
 	
 	private String mascaraCpfCnpj;
 	private Integer sizeCpfCnpj;
+	
+	private Endereco enderecoSelecionado;
 		
 	public CadastroClienteBean() {
 		limpar();
@@ -96,5 +98,18 @@ public class CadastroClienteBean implements Serializable {
 	public void setSizeCpfCnpj(Integer sizeCpfCnpj) {
 		this.sizeCpfCnpj = sizeCpfCnpj;
 	}
+
+	public Endereco getEnderecoSelecionado() {
+		return enderecoSelecionado;
+	}
+
+	public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
+		this.enderecoSelecionado = enderecoSelecionado;
+	}
+	
+	public void excluirEndereco() {
+		
+	}
+	
 
 }
